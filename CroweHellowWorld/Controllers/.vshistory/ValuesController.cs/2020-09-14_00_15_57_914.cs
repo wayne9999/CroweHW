@@ -27,17 +27,13 @@ namespace CroweHellowWorld.Controllers
                 using (CroweHellowWorldDBEntities entities = new CroweHellowWorldDBEntities())
                 {
                     var slist = entities.HWs.ToList();
-                    if (slist == null)
-                    {
-                        string message = "Table doesnt have any data";
-                        throw new HttpResponseException(
-                            Request.CreateErrorResponse(HttpStatusCode.NotFound, message));
-                    }
-                    foreach (var item in slist)
+
+                    foreach(var item in slist)
                     {
                         hwList.Add(item.Name);
 
                     }
+
                     return hwList;
                 } 
             }
@@ -46,18 +42,11 @@ namespace CroweHellowWorld.Controllers
                 using (CroweHellowWorldDBEntities entities = new CroweHellowWorldDBEntities())
                 {
                     var chw= entities.HWs.FirstOrDefault(p=>p.ID==id);
-                    if (chw == null)
-                    {
-                        string message = "ID doesnt match what is in the table";
-                        throw new HttpResponseException(
-                            Request.CreateErrorResponse(HttpStatusCode.NotFound, message));
-                    }else
-                    {
-                        hwList.Add(chw.Name);
-                    }                    
+                    hwList.Add(chw.Name);
                 }
                 return hwList;
-            }               
+            }
+                
         }
 
         // POST api/values
